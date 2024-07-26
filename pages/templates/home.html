@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}
+      Page|Home
+{% endblock title %}
+    
+
+{% block css %}
+    <style>
+    
+    </style>
+{% endblock css %}
+    
+{% block content %}
+{% load static %}
+<section class="gradient-form" >
+  <div class="row ">
+     
+     {% for user in users %}
+     <div class="col-12 mx-0  col-sm-6 col-md-4 col-lg-3 col-xl-2 my-2">
+
+        <div class="card text-center h-100" >
+                     <div class="card-header bg-black text-white  text-uppercase">{{user.username }}</div>
+           
+            <div class="card-body flex-column d-flex justify-content-center">
+             <div class="image " >
+              {% if user.imageuser  %}
+              <img width="100" height="100" class="card-img-top object-fit-contain  Card img-fluid" src="{% static 'images/'%}{{user.imageuser}}"   alt=" image">
+              {% else %}
+                <img src="{% static 'images/profil_user/logo_profil.jpeg' %} " class="object-fit-contain Card img-fluid image"
+               alt="logo">
+             {% endif %}
+             </div>
+              <h4 class="card-title">{{user.first_name|truncatechars:10}}</h4>
+              <p class="card-text">{{user.last_name|truncatechars:10}}</p>
+             
+            </div>
+            <div class="card-footer d-flex  justify-content-center">
+             
+                <a href="{% url 'pages:user_spec' user.id %}"   data-id = {{user.id}} class=" w-100 btn btn-outline-primary btn-md rounded-pill view_user">Voir Profil</a>
+              
+            </div>
+          </div>          
+    </div>
+     {% endfor %}
+        
+  </div>
+  </section>
+{% endblock content %}
+    

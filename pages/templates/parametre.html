@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}
+      Page|Parametre
+{% endblock title %}
+    
+
+{% block css %}
+    <style>
+    
+    </style>
+{% endblock css %}
+    
+{% block content %}
+{% load static %}
+<section class="gradient-form" >
+    <div class="container py-1 ">
+      <div class="row d-flex justify-content-center align-items-center ">
+        <div class="col-xl-10">
+          <div class="card rounded-3 text-black">
+              
+           
+                    
+                 
+               
+                  
+         
+            <div class="row g-0">
+              <div class="col-lg-4">
+                <div class="card-body px-md-5 mx-md-4">
+  
+                  <div class="text-center">
+                       {% if request.user.imageuser   %}
+                         <img src="{% static 'images/'%}{{request.user.imageuser}}"  class="img-fluid "
+                      style="width: 100px;" alt="profil">
+                      {% else %}
+                      <img src="{% static 'images/profil_user/logo_profil.jpeg' %} " class=" Card img-fluid image"
+                      alt="logo">
+                       {% endif %}
+                    
+                    <h4 class="mt-1 mb-2 pb-1">{{request.user.username}}</h4>
+                  </div>
+  
+                  <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% comment %} {{request.user.imageuser }} {% endcomment %}
+                    {{ form.as_p }}
+                    <button class="btn btn-outline-success btn-sm" type="submit">Mettre à jour</button>
+                </form>
+  
+                </div>
+              </div>
+              <div class="col-lg-8 d-none d-sm-flex align-items-center  bg-primary">
+                <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                  <h4 class="mb-4">Agence Portuaire Maritime Fluvial</h4>
+                  <h6 class="large mb-0">Vers un Secteur Maritime et Fluvial Moderne,Pilier du Developpement Economique de Madagascar.</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}
+    

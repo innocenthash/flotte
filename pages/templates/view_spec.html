@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block title %}
+      Page|User Unique
+{% endblock title %}
+    
+
+{% block css %}
+    <style>
+    
+    </style>
+{% endblock css %}
+    
+{% block content %}
+{% load static %}
+<section class="gradient-form" >
+    <div class="container py-1 ">
+      <div class="row d-flex justify-content-center align-items-center ">
+        <div class="col-xl-10">
+          <div class="card rounded-3 text-black">
+              
+           
+                    
+                 
+               
+                  
+         
+            <div class="row g-0">
+              <div class="col-12 col-lg-4">
+                <div class="card-body m-0 px-md-5 mx-md-4">
+  
+                  <div class="text-center">
+                       {% if user.imageuser   %}
+                         <img src="{% static 'images/'%}{{user.imageuser}}"  class="img-fluid object-fit-contain  "
+                       alt="profil">
+                      {% else %}
+                      <img src="{% static 'images/profil_user/logo_profil.jpeg' %} " class=" Card img-fluid image"
+                      alt="logo">
+                       {% endif %}
+                    
+                    
+                  </div>
+  
+                  
+                </div>
+              </div>
+              <div class="col-12 col-lg-8 d-flex flex-column justify-content-start  bg-black">
+                <div class="text-white px-3 py-1 p-md-1 mx-md-4 d-inline-block d-sm-flex justify-content-between">
+                    <h6 class="mb-4 p-0"> <span>Nom :</span> {{ user.first_name }}</h6>
+                    <h6 class="large mb-0"><span>Prenom : </span> {{ user.last_name }} </h6>
+                </div>
+                <div class="text-white px-3 py-1 p-md-1 mx-md-4 d-inline-block d-sm-flex justify-content-between">
+                    <h6 class="mb-4 p-0 m-0"><span>Nom d'utilisateur :</span>{{user.username }}</h6>
+                   <h6 class="large m-0 p-0 mb-0"><span>Adresse Electronique :</span> {{user.email}}.</h6>
+                  </div>
+
+                  <div class="text-white px-3 py-1 p-md-1 mx-md-4 d-inline-block d-sm-flex justify-content-between">
+                    <h6 class="mb-4 p-0"><span> msisdn : </span>{{ user.userwithflotte.card.msisdn }}</h6>
+                    <h6 class="mb-4 p-0"><span> number_sim : </span>{{ user.userwithflotte.card.number_sim }}</h6>
+                    
+                  </div>
+                  <div class="text-white px-3 py-1 p-md-1 mx-md-4 d-inline-block d-sm-flex justify-content-between">
+                      <h6 class="mb-4"><span>puk : </span>{{user.userwithflotte.card.puk}}</h6>
+                      
+                  </div>
+                  <div class="text-white px-3 py-1 p-md-1 mx-md-4 d-inline-block d-sm-flex justify-content-between">
+                    <h6 class="mb-4"><span>custcode : </span>{{user.userwithflotte.custcode}}</h6>
+                    <h6 class="mb-4"><span>type_de_ligne : </span>{{user.userwithflotte.type_de_ligne }}</h6>
+                   
+                </div><div class="text-white px-3 py-1 p-md-1 mx-md-4 d-inline-block d-sm-flex justify-content-between">
+                    <h6 class="mb-4"><span>plan_tarifaire :</span> {{user.userwithflotte.plan_tarifaire}}</h6>
+                   <h6 class="mb-4"> <span>localisation : </span>{{user.userwithflotte.localisation }}</h6>
+                   
+                </div>
+
+                {% comment %} <table class="table">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">Nom</th>
+                      <th scope="col">Prenom</th>
+                      <th scope="col">E-mail</th>
+                      <th scope="col">Msidn</th>
+                      <th scope="col">Number_Sim</th>
+                      <th scope="col">Puk</th>
+                      <th scope="col">Custcode</th>
+                      <th scope="col">Type_de_ligne</th>
+                      <th scope="col">Plan_tarifaire</th>
+                      <th scope="col">Localisation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                    
+                      <td>{{ user.first_name }}</td>
+                      <td>{{ user.last_name }}</td>
+                      <td>{{user.email}}</td>
+                      <td>{{user.userwithflotte.card.msisdn }}</td>
+                      <td>{{user.userwithflotte.card.number_sim}}</td>
+                      <td>{{user.userwithflotte.card.puk}}</td>
+                      <td>{{user.userwithflotte.custcode}}</td>
+                      <td>{{user.userwithflotte.type_de_ligne}}</td>
+                      <td>{{user.userwithflotte.plan_tarifaire}}</td>
+                      <td>{{user.userwithflotte.localisation}}</td>
+                    </tr>
+                    
+                  </tbody>
+                </table> {% endcomment %}
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}
+    

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{% block title %} {% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.css' %}" />
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'fontawesome/js/all.js' %}" />
+    <link rel="stylesheet" href="{% static 'fontawesome/js/all.min.js' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
+    />
+
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}"> </script>
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"> </script>
+    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    {% block css %} {% endblock css %} {% load bootstrap5 %} {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <script type="text/javascript">
+      var moi = "{{request.user}}" ;
+
+      function getToken(name) {
+       var cookieValue = null;
+       if (document.cookie && document.cookie != '') {
+       var cookies = document.cookie.split(';');
+       for (var i = 0; i < cookies.length; i++) {
+       var cookie = jQuery.trim(cookies[i]);
+       // Does this cookie string begin with the name we want?
+       if (cookie.substring(0, name.length + 1) == (name + '=')) {
+       cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+       break;
+       }
+       }
+       }
+       return cookieValue;
+       }
+       var csrftoken = getToken('csrftoken');
+   </script>
+  </head>
+  <body class="" style="background-color: #eee">
+    <nav class="navbar p-0 navbar-expand-sm navbar-dark bg-white sticky-top mb-2">
+      <div class="container-fluid bg-white  mt-0">
+        <a class="navbar-brand" href="javascript:void(0)">
+          <img
+            src="{% static 'images/logo/OIP (26).jpeg' %} "
+            style="width: 50px"
+            class="rounded-pill"
+            alt=""
+            srcset=""
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mynavbar"
+        >
+          <span class="" role="button"
+            ><i class="fa fa-bars text-primary display-6" aria-hidden="true"></i
+          ></span>
+        </button>
+        <div class="collapse container navbar-collapse" id="mynavbar">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a
+                data-bs-toggle="tooltip"
+                title="Accueil"
+                data-bs-placement="bottom"
+                class="nav-link text-uppercase d-none d-sm-flex"
+                href="{% url 'pages:home' %}"
+              >
+                <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                <svg
+                  width="50px"
+                  height="50px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M19 9.77806V16.2C19 17.8801 19 18.7202 18.673 19.3619C18.3854 19.9264 17.9265 20.3854 17.362 20.673C17.2111 20.7499 17.0492 20.8087 16.868 20.8537M5 9.7774V16.2C5 17.8801 5 18.7202 5.32698 19.3619C5.6146 19.9264 6.07354 20.3854 6.63803 20.673C6.78894 20.7499 6.95082 20.8087 7.13202 20.8537M21 12L15.5668 5.96393C14.3311 4.59116 13.7133 3.90478 12.9856 3.65138C12.3466 3.42882 11.651 3.42887 11.0119 3.65153C10.2843 3.90503 9.66661 4.59151 8.43114 5.96446L3 12M7.13202 20.8537C7.65017 18.6447 9.63301 17 12 17C14.367 17 16.3498 18.6447 16.868 20.8537M7.13202 20.8537C7.72133 21 8.51495 21 9.8 21H14.2C15.485 21 16.2787 21 16.868 20.8537M14 12C14 13.1045 13.1046 14 12 14C10.8954 14 10 13.1045 10 12C10 10.8954 10.8954 9.99996 12 9.99996C13.1046 9.99996 14 10.8954 14 12Z"
+                    stroke="#6C6C6C"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+              <a
+              href="{% url 'pages:home' %}"
+              class="text-uppercase inscription w-50 rounded-pill mx-2 d-block d-sm-none btn btn-outline-primary my-5  "
+            >
+            
+            Accueil
+
+            </a>
+            </li>
+            {% comment %}
+            <li class="nav-item">
+              <a class="nav-link" href="javascript:void(0)">Link</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="javascript:void(0)">Link</a>
+            </li>
+            {% endcomment %}
+          </ul>
+          <div class="d-flex">
+            {% if user.is_authenticated %}
+            <div
+              class="nav-item mx-4  d-none d-sm-block"
+              data-bs-toggle="tooltip"
+              title="Parametre"
+              data-bs-placement="bottom"
+            >
+              <a
+                href="{% url 'pages:parametre' %}"
+                class="text-uppercase inscription rounded-pill mx-2"
+              >
+                <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                <svg
+                  width="50px"
+                  height="50px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z"
+                    stroke="#6C6C6C"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M12.9046 3.06005C12.6988 3 12.4659 3 12 3C11.5341 3 11.3012 3 11.0954 3.06005C10.7942 3.14794 10.5281 3.32808 10.3346 3.57511C10.2024 3.74388 10.1159 3.96016 9.94291 4.39272C9.69419 5.01452 9.00393 5.33471 8.36857 5.123L7.79779 4.93281C7.3929 4.79785 7.19045 4.73036 6.99196 4.7188C6.70039 4.70181 6.4102 4.77032 6.15701 4.9159C5.98465 5.01501 5.83376 5.16591 5.53197 5.4677C5.21122 5.78845 5.05084 5.94882 4.94896 6.13189C4.79927 6.40084 4.73595 6.70934 4.76759 7.01551C4.78912 7.2239 4.87335 7.43449 5.04182 7.85566C5.30565 8.51523 5.05184 9.26878 4.44272 9.63433L4.16521 9.80087C3.74031 10.0558 3.52786 10.1833 3.37354 10.3588C3.23698 10.5141 3.13401 10.696 3.07109 10.893C3 11.1156 3 11.3658 3 11.8663C3 12.4589 3 12.7551 3.09462 13.0088C3.17823 13.2329 3.31422 13.4337 3.49124 13.5946C3.69158 13.7766 3.96395 13.8856 4.50866 14.1035C5.06534 14.3261 5.35196 14.9441 5.16236 15.5129L4.94721 16.1584C4.79819 16.6054 4.72367 16.829 4.7169 17.0486C4.70875 17.3127 4.77049 17.5742 4.89587 17.8067C5.00015 18.0002 5.16678 18.1668 5.5 18.5C5.83323 18.8332 5.99985 18.9998 6.19325 19.1041C6.4258 19.2295 6.68733 19.2913 6.9514 19.2831C7.17102 19.2763 7.39456 19.2018 7.84164 19.0528L8.36862 18.8771C9.00393 18.6654 9.6942 18.9855 9.94291 19.6073C10.1159 20.0398 10.2024 20.2561 10.3346 20.4249C10.5281 20.6719 10.7942 20.8521 11.0954 20.94C11.3012 21 11.5341 21 12 21C12.4659 21 12.6988 21 12.9046 20.94C13.2058 20.8521 13.4719 20.6719 13.6654 20.4249C13.7976 20.2561 13.8841 20.0398 14.0571 19.6073C14.3058 18.9855 14.9961 18.6654 15.6313 18.8773L16.1579 19.0529C16.605 19.2019 16.8286 19.2764 17.0482 19.2832C17.3123 19.2913 17.5738 19.2296 17.8063 19.1042C17.9997 18.9999 18.1664 18.8333 18.4996 18.5001C18.8328 18.1669 18.9994 18.0002 19.1037 17.8068C19.2291 17.5743 19.2908 17.3127 19.2827 17.0487C19.2759 16.8291 19.2014 16.6055 19.0524 16.1584L18.8374 15.5134C18.6477 14.9444 18.9344 14.3262 19.4913 14.1035C20.036 13.8856 20.3084 13.7766 20.5088 13.5946C20.6858 13.4337 20.8218 13.2329 20.9054 13.0088C21 12.7551 21 12.4589 21 11.8663C21 11.3658 21 11.1156 20.9289 10.893C20.866 10.696 20.763 10.5141 20.6265 10.3588C20.4721 10.1833 20.2597 10.0558 19.8348 9.80087L19.5569 9.63416C18.9478 9.26867 18.6939 8.51514 18.9578 7.85558C19.1262 7.43443 19.2105 7.22383 19.232 7.01543C19.2636 6.70926 19.2003 6.40077 19.0506 6.13181C18.9487 5.94875 18.7884 5.78837 18.4676 5.46762C18.1658 5.16584 18.0149 5.01494 17.8426 4.91583C17.5894 4.77024 17.2992 4.70174 17.0076 4.71872C16.8091 4.73029 16.6067 4.79777 16.2018 4.93273L15.6314 5.12287C14.9961 5.33464 14.3058 5.0145 14.0571 4.39272C13.8841 3.96016 13.7976 3.74388 13.6654 3.57511C13.4719 3.32808 13.2058 3.14794 12.9046 3.06005Z"
+                    stroke="#6C6C6C"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+              
+            </div>
+            
+            <div class="nav-item  d-block d-sm-none">
+              <a
+              href="{% url 'pages:parametre' %}"
+              class="text-uppercase inscription rounded-pill mx-2  btn btn-outline-primary  "
+            >
+            
+            Parametre
+
+            </a>
+            </div>
+
+            <div
+              class="nav-item d-none d-sm-block"
+              data-bs-toggle="tooltip"
+              title="Deconnexion"
+              data-bs-placement="bottom"
+            >
+              <a
+                href="{% url 'pages:deconnexion' %}"
+                class="text-uppercase inscription rounded-pill mx-2"
+              >
+                <?xml version="1.0" encoding="utf-8"?>
+                <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                <svg
+                  fill="#6C6C6C"
+                  width="50px"
+                  height="50px"
+                  viewBox="0 0 32 32"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M0 9.875v12.219c0 1.125 0.469 2.125 1.219 2.906 0.75 0.75 1.719 1.156 2.844 1.156h6.125v-2.531h-6.125c-0.844 0-1.5-0.688-1.5-1.531v-12.219c0-0.844 0.656-1.5 1.5-1.5h6.125v-2.563h-6.125c-1.125 0-2.094 0.438-2.844 1.188-0.75 0.781-1.219 1.75-1.219 2.875zM6.719 13.563v4.875c0 0.563 0.5 1.031 1.063 1.031h5.656v3.844c0 0.344 0.188 0.625 0.5 0.781 0.125 0.031 0.25 0.031 0.313 0.031 0.219 0 0.406-0.063 0.563-0.219l7.344-7.344c0.344-0.281 0.313-0.844 0-1.156l-7.344-7.313c-0.438-0.469-1.375-0.188-1.375 0.563v3.875h-5.656c-0.563 0-1.063 0.469-1.063 1.031z"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+            <div class="nav-item mx-4 d-block d-sm-none">
+              <a
+              href="{% url 'pages:deconnexion' %}"
+              class="text-uppercase inscription rounded-pill mx-2  btn btn-danger  "
+            >
+            
+          Deconnexion
+            </a>
+            </div>
+            {% else %}
+            <div class="nav-item "  data-bs-toggle="tooltip"
+            title="Inscription"
+            data-bs-placement="bottom">
+              <a
+                href="{% url 'pages:inscription' %}"
+                class="text-uppercase inscription d-none d-sm-block rounded-pill mx-2"
+                ><?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 21H12C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3H11M11 16L15 12M15 12L11 8M15 12H3" stroke="#6C6C6C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+
+              <a
+                href="{% url 'pages:inscription' %}"
+                class="btn btn-outline-primary text-uppercase inscription d-block d-sm-none rounded-pill mx-2"
+                > Inscription
+              </a>
+
+
+            </div>
+
+            <div class="nav-item"  data-bs-toggle="tooltip"
+            title="Connexion"
+            data-bs-placement="bottom">
+              <a
+                href="{% url 'pages:connexion' %}"
+                class=" inscription  d-none d-sm-block text-uppercase rounded-pill"
+                ><?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 3H12C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21H13M17 8L21 12M21 12L17 16M21 12H9" stroke="#6C6C6C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg></a
+                
+              >
+
+              <a
+                href="{% url 'pages:connexion' %}"
+                class="btn btn-primary inscription d-block d-sm-none  text-uppercase rounded-pill"
+                > Connexion </a>
+           
+           
+           
+            </div>
+            {% endif %}
+          </div>
+          {% comment %}
+          <form class="d-flex">
+            <input class="form-control me-2" type="text" placeholder="Search" />
+            <button class="btn btn-primary" type="button">Search</button>
+          </form>
+          {% endcomment %}
+        </div>
+      </div>
+    </nav>
+    <!-- ***** Preloader End ***** -->
+
+    <!-- ***** Header Area Start ***** -->
+
+    <main class="container">{% block content %} {% endblock content %}</main>
+
+    <footer class="bg-light d-flex justify-content-center  align-content-end ">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center d-flex justify-content-center  align-content-end mt-5">
+            <p class="h6 display-6 align-content-end ">
+              Copyright © 2024 APMF MADAGASCAR. All rights
+              reserved.
+
+              <br />Creer par :
+              <a
+                href="https://www.facebook.com/inno.cent.90475069"
+                target="_blank"
+                title="Developpeur web et mobile"
+                >ANDRIAMANALINA Innocent</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+   
+    <script src="{% static 'js/user_view.js' %}"></script>
+  <script src="{% static 'assets/js/tabs.js' %}"></script>
+  <script>
+    var tooltipTriggerList = [].slice.call(
+      document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    );
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+  </script>
+  </body>
+
+  
+</html>

@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block title %}
+      Page|Connexion
+{% endblock title %}
+    
+
+{% block css %}
+    <style>
+        .gradient-form{
+            height: 50% !important;
+        }
+        .gradient-custom-2 {
+            /* fallback for old browsers */
+            background: #04BBFF;
+            
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, #04BBFF, #04BBFF, #04BBFF, #04BBFF);
+            
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right, #04BBFF, #04BBFF, #04BBFF, #04BBFF);
+            }
+            
+            @media screen  (min-width: 768px) {
+            .gradient-form {
+            height: 100vh !important;
+            }
+            }
+            @media screen (min-width: 769px) {
+            .gradient-custom-2 {
+            border-top-right-radius: .3rem;
+            border-bottom-right-radius: .3rem;
+            }
+            }
+    </style>
+{% endblock css %}
+    
+{% block content %}
+{% load static %}
+<section class="gradient-form" >
+    <div class="container py-1 ">
+      <div class="row d-flex justify-content-center align-items-center ">
+        <div class="col-xl-10">
+          <div class="card rounded-3 text-black">
+              
+            {% if messages %}
+                
+                {% for message in messages %}
+                <div class="alert alert-{% if message.tags == 'error' %}warning{% else %}success{% endif %} alert-dismissible fade show d-flex" role="alert">
+                  
+                  {% if message.tags == 'error'  %}
+                  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                    <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+                      <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    </symbol>
+                  <use xlink:href="#exclamation-triangle-fill"/></svg>
+                  {% else %}
+                  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/>
+                    <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                    </symbol>
+                  </svg>
+                  {% endif %}
+                    
+                 
+                  <div>
+                    <strong>Informations</strong> {{message}}.
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                
+                </div>
+                {% endfor %}
+                  
+            {% endif %}
+            <div class="row g-0">
+              <div class="col-lg-6">
+                <div class="card-body px-md-5 mx-md-4">
+  
+                  <div class="text-center">
+                    <img src="{% static 'images/logo/OIP (26).jpeg' %} " class="img-fluid "
+                      style="width: 100px;" alt="logo">
+                    <h4 class="mt-1 mb-2 pb-1">Agence APMF</h4>
+                  </div>
+  
+                  <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.GET.next }}">
+                    <p>Please login to your account</p>
+  
+                    <div  class="form-outline mb-2 mx-1">
+                      <input type="text" id="email" name="username" class="form-control rounded-pill  " required
+                        placeholder="" />
+                      <label class="form-label" for="email">Username</label>
+                    </div>
+  
+                    <div class="form-outline mb-2 mx-1">
+                      <input type="password" id="password" name="password" class="form-control  rounded-pill "  required />
+                      <label class="form-label" for="password">Password</label>
+                    </div>
+  
+                    <div class="text-center pt-1 mb-2 pb-1 d-flex flex-column">
+                      <input value="Log in" class="btn btn-primary rounded-pill btn-block fa-lg  mb-3" type="submit">
+                      <a class="text-muted" href="{% url 'pages:forget_password' %}">Forgot password?</a>
+                    </div>
+  
+                    <div class="d-flex align-items-center justify-content-center pb-4">
+                      <p class="mb-0 me-2">Don't have an account?</p>
+                      <a  type="button" href="{% url 'pages:inscription' %}" class="btn btn-outline-primary rounded-pill">Create new</a>
+                    </div>
+  
+                  </form>
+  
+                </div>
+              </div>
+              <div class="col-lg-6 d-none d-sm-flex align-items-center  bg-primary">
+                <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                  <h4 class="mb-4">Agence Portuaire Maritime Fluvial</h4>
+                  <h6 class="large mb-0">Vers un Secteur Maritime et Fluvial Moderne,Pilier du Developpement Economique de Madagascar.</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}
+    
